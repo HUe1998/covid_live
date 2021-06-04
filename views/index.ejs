@@ -1,5 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-
+        <!-- <link rel="stylesheet" href="/index.css" /> -->
+        <title>Live Covid Cases</title>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.3.2/chart.min.js"></script>
+    </head>
+    <body>
+        <div>
+            <canvas id="myChart" width="400" height="400"></canvas>
+        </div>
+        <script>
+            const data = {
+                labels:  <%-JSON.stringify(requiredData.countryList)%>,
+                datasets: [{
+                    label: 'My First Dataset',
+                    data: [<%= requiredData.totalList %>],
+                    // backgroundColor: [
+                    // 'rgb(255, 99, 132)',
+                    // 'rgb(54, 162, 235)',
+                    // 'rgb(255, 205, 86)'
+                    // ],
+                    hoverOffset: 4
+                }]
+            };            
+            const config = {
+                type: 'pie',
+                data: data,
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        title: {
+                            display: true,
+                            text: 'Live Total Confirmed Cases'
+                        }
+                    }
+                },
+            };
+            var myChart = new Chart(
+                document.getElementById('myChart'),
+                config
+            );
+        </script>
+    </body>
 </html>
