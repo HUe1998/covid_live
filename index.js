@@ -7,9 +7,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 app.set('view engine', 'ejs');
 
-
-app.listen(4000, () => {
-    console.log('App listening on port 4000');
+app.set("port", process.env.PORT || 3000);
+const server = app.listen(app.get("port"), () => {
+    console.log(`Server running at http://localhost:${app.get("port")}`);
 });
 
 app.get('/', async (req, res) => {
